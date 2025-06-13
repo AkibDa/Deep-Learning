@@ -39,3 +39,15 @@ test_features = test_dataset.copy()
 
 train_labels = train_dataset.pop('MPG')
 test_labels = test_dataset.pop('MPG')
+
+def plot(feature, x=None, y=None):
+  plt.figure(figsize=(10, 8))
+  plt.scatter(train_features[feature], train_labels, label='Data')
+  if x is not None and y is not None:
+    plt.plot(x, y, color='k', label='Prediction')
+  plt.xlabel(feature)
+  plt.ylabel('MPG')
+  plt.legend()
+
+plot('Horsepower')
+plot('Weight')
