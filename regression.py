@@ -97,3 +97,14 @@ history = single_feature_model.fit(train_features[feature],
                                    epochs=100,
                                    verbose=1,
                                    validation_split=0.2)
+
+def plot_loss(history):
+  plt.plot(history.history['loss'], label='loss')
+  plt.plot(history.history['val_loss'], label='val_loss')
+  plt.ylim([0, 25])
+  plt.xlabel('Epoch')
+  plt.ylabel('Error [MPG]')
+  plt.legend()
+  plt.grid(True)
+plot_loss(history)
+
