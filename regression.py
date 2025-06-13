@@ -25,3 +25,10 @@ dataset['Europe'] = (origin == 2) * 1
 dataset['Japan'] = (origin == 3) * 1
 
 print(dataset.tail())
+
+# split the data into train and test
+train_dataset = dataset.sample(frac=0.8, random_state=0)
+test_dataset = dataset.drop(train_dataset.index)
+
+print(dataset.shape, train_dataset.shape, test_dataset.shape)
+print(train_dataset.describe().transpose())
