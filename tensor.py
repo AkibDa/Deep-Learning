@@ -40,3 +40,10 @@ print(c)
 x = tf.constant([[1,2,3,4], [5,6,7,8]])
 print(x[:, 0])
 print(x[0, :])
+
+# reshaping
+x = tf.random.normal((2, 3))
+print(x)
+
+x = tf.reshape(x, (-1, 2))
+print(x)
