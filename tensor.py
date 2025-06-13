@@ -35,3 +35,8 @@ b = tf.random.normal((2, 2))
 
 c = tf.matmul(a,b)
 print(c)
+
+# slicing, indexing
+x = tf.constant([[1,2,3,4], [5,6,7,8]])
+print(x[:, 0])
+print(x[0, :])
