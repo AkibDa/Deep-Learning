@@ -51,3 +51,19 @@ def plot(feature, x=None, y=None):
 
 plot('Horsepower')
 plot('Weight')
+
+# Normalise the data
+print(train_dataset.describe().transpose()[['mean', 'std']])
+
+# Normalization
+normalizer = layers.Normalization()
+
+# Adapt to the data
+normalizer.adapt(np.array(train_features))
+print(normalizer.mean.numpy())
+
+# When the layer is called it returns the input data, with each features independently normalised:
+# (input-mean)/stddev
+first = np.array(train_features[:1])
+print('First example: ', first)
+print('Normalized: ',normalizer(first).numpy())
