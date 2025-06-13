@@ -7,6 +7,7 @@ np.set_printoptions(precision=3, suppress=True)
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+tf.config.run_functions_eagerly(True)
 
 url = "http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data"
 column_names = ['MPG', 'Cylinders', 'Displacement', 'Horsepower', 'Weight','Acceleration','Model Year','Origin']
@@ -124,7 +125,7 @@ dnn_model = keras.Sequential([
   layers.Dense(units=1),
 ])
 
-dnn_model.compile(loss=loss, optimizer=optimizer)
+dnn_model.compile(loss=loss, optimizer=keras.optimizers.Adam())
 print(dnn_model.summary())
 
 dnn_model.fit(train_features[feature], train_labels, epochs=100, verbose=1, validation_split=0.2)
@@ -137,14 +138,17 @@ y = dnn_model.predict(x)
 
 plot(feature, x, y)
 
-# multiple inputs
+# Rebuild model for single feature input
 linear_model = keras.Sequential([
-  normalizer,
-  layers.Dense(64, activation='relu'),
-  layers.Dense(units=1),
+    layers.Input(shape=(1,)),  # Explicitly define input shape
+    layers.Dense(units=1)
 ])
 
-linear_model.compile(loss=loss, optimizer=tf.optimizers.Adam(learning_rate=0.1))
+linear_model.compile(
+    loss=keras.losses.MeanAbsoluteError(),
+    optimizer=keras.optimizers.Adam()
+)
 
-linear_model.fit(train_features[feature], train_labels, epochs=100, verbose=1, validation_split=0.2)
-linear_model.evaluate(test_features[feature], test_labels, verbose=1)
+# Train the model
+linear_model.fit(train_features[[feature]], train_labels,
+                 epochs=100, verbose=1, validation_split=0.2)
