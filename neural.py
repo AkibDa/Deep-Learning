@@ -21,3 +21,14 @@ model = keras.models.Sequential([
 ])
 
 print(model.summary())
+# model = keras.Sequential()
+# model.add(keras.layers.Flatten(input_shape=(28, 28)))
+# model.add(keras.layers.Dense(128, activation=tf.nn.relu))
+# model.add(keras.layers.Dense(10))
+
+# loss and optimizer
+loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+optimizer = keras.optimizers.Adam(lr=0.001)
+metrics = ['accuracy']
+
+model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
