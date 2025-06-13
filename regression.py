@@ -83,3 +83,10 @@ single_feature_model = keras.models.Sequential([
   single_feature_normalizer,
   layers.Dense(units=1), # Linear Regression Model
 ])
+print(single_feature_model.summary())
+
+# loss and optimizer
+loss = keras.losses.MeanAbsoluteError()
+optimizer = keras.optimizers.Adam()
+
+single_feature_model.compile(loss=loss, optimizer=optimizer)
