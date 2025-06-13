@@ -38,3 +38,25 @@ batch_size = 64
 epochs = 5
 
 model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, shuffle=True, verbose=1)
+
+# evaluate
+model.evaluate(x_test, y_test, batch_size=batch_size, verbose=1)
+
+# predictions
+probability_model = keras.models.Sequential([
+  model,
+  keras.layers.Softmax()
+])
+
+predictions = probability_model(x_test)
+print(predictions[0])
+label = np.argmax(predictions[0])
+print(label)
+
+# model + softmax
+predictions = model(x_test)
+predictions = tf.nn.softmax(predictions)
+pred0 = predictions[0]
+print(pred0)
+label0 = np.argmax(pred0)
+print(label0)
