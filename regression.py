@@ -67,3 +67,19 @@ print(normalizer.mean.numpy())
 first = np.array(train_features[:1])
 print('First example: ', first)
 print('Normalized: ',normalizer(first).numpy())
+
+# Regression
+#  1. Normalize the input horsepower
+#  2. Apply a linear transformation (y=m*x+b) to produce 1 output using layers.Dense
+
+feature = 'Horsepower'
+single_feature = np.array(train_features[feature])
+print(single_feature.shape, train_features.shape)
+
+single_feature_normalizer = layers.Normalization()
+single_feature_normalizer.adapt(single_feature)
+
+single_feature_model = keras.models.Sequential([
+  single_feature_normalizer,
+  layers.Dense(units=1), # Linear Regression Model
+])
