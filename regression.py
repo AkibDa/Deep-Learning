@@ -14,3 +14,14 @@ column_names = ['MPG', 'Cylinders', 'Displacement', 'Horsepower', 'Weight','Acce
 dataset = pd.read_csv(url, names=column_names, na_values='?', comment='\t', sep=' ', skipinitialspace=True)
 
 print(dataset.tail())
+
+# clean data
+dataset = dataset.dropna()
+
+# convert categorical 'Origin' data into one-hot data
+origin = dataset.pop('Origin')
+dataset['USA'] = (origin == 1) * 1
+dataset['Europe'] = (origin == 2) * 1
+dataset['Japan'] = (origin == 3) * 1
+
+print(dataset.tail())
