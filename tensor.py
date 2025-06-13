@@ -55,3 +55,9 @@ print(type(x))
 
 x = tf.convert_to_tensor(x)
 print(type(x))
+
+y = tf.constant(["Akib", "Alom"])
+print(y)
+
+y = tf.Variable([1,2,3])
+print(y)
