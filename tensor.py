@@ -47,3 +47,11 @@ print(x)
 
 x = tf.reshape(x, (-1, 2))
 print(x)
+
+# numpy
+x = x.numpy()
+print(x)
+print(type(x))
+
+x = tf.convert_to_tensor(x)
+print(type(x))
