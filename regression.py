@@ -108,3 +108,43 @@ def plot_loss(history):
   plt.grid(True)
 plot_loss(history)
 
+# predict and plot
+range_min = np.min(test_features[feature]) - 10
+range_max = np.max(test_features[feature]) + 10
+x = tf.linspace(range_min, range_max, 200)
+y = single_feature_model.predict(x)
+
+plot(feature, x, y)
+
+# DNN
+dnn_model = keras.Sequential([
+  single_feature_normalizer,
+  layers.Dense(64, activation='relu'),
+  layers.Dense(64, activation='relu'),
+  layers.Dense(units=1),
+])
+
+dnn_model.compile(loss=loss, optimizer=optimizer)
+print(dnn_model.summary())
+
+dnn_model.fit(train_features[feature], train_labels, epochs=100, verbose=1, validation_split=0.2)
+
+dnn_model.evaluate(test_features[feature], test_labels, verbose=1)
+
+# predict and plot
+x = tf.linspace(range_min, range_max, 200)
+y = dnn_model.predict(x)
+
+plot(feature, x, y)
+
+# multiple inputs
+linear_model = keras.Sequential([
+  normalizer,
+  layers.Dense(64, activation='relu'),
+  layers.Dense(units=1),
+])
+
+linear_model.compile(loss=loss, optimizer=tf.optimizers.Adam(learning_rate=0.1))
+
+linear_model.fit(train_features[feature], train_labels, epochs=100, verbose=1, validation_split=0.2)
+linear_model.evaluate(test_features[feature], test_labels, verbose=1)
