@@ -32,3 +32,10 @@ test_dataset = dataset.drop(train_dataset.index)
 
 print(dataset.shape, train_dataset.shape, test_dataset.shape)
 print(train_dataset.describe().transpose())
+
+# split features from labels
+train_features = train_dataset.copy()
+test_features = test_dataset.copy()
+
+train_labels = train_dataset.pop('MPG')
+test_labels = test_dataset.pop('MPG')
