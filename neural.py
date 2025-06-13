@@ -60,3 +60,8 @@ pred0 = predictions[0]
 print(pred0)
 label0 = np.argmax(pred0)
 print(label0)
+
+pred05s = predictions[0:5]
+print(pred05s.shape)
+label05 = np.argmax(pred05s, axis=1)
+print(label05)
