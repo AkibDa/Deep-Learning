@@ -73,7 +73,7 @@ print('Normalized: ',normalizer(first).numpy())
 #  2. Apply a linear transformation (y=m*x+b) to produce 1 output using layers.Dense
 
 feature = 'Horsepower'
-single_feature = np.array(train_features[feature])
+single_feature = np.array(train_features[[feature]])
 print(single_feature.shape, train_features.shape)
 
 single_feature_normalizer = layers.Normalization()
@@ -90,3 +90,10 @@ loss = keras.losses.MeanAbsoluteError()
 optimizer = keras.optimizers.Adam()
 
 single_feature_model.compile(loss=loss, optimizer=optimizer)
+
+# training the model
+history = single_feature_model.fit(train_features[feature],
+                                   train_labels,
+                                   epochs=100,
+                                   verbose=1,
+                                   validation_split=0.2)
