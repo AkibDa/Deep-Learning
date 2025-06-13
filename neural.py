@@ -13,7 +13,11 @@ print(x_test.shape, y_test.shape)
 # normalising 0,255 --> 0,1
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
-for i in range(6):
-  plt.subplot(2, 3, i + 1)
-  plt.imshow(x_train[i], cmap=plt.get_cmap('gray'))
-plt.show()
+# model
+model = keras.models.Sequential([
+  keras.layers.Flatten(input_shape=(28, 28)),
+  keras.layers.Dense(128, activation=tf.nn.relu),
+  keras.layers.Dense(10),
+])
+
+print(model.summary())
