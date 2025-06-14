@@ -30,6 +30,14 @@ class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', ' dog', 'frog', 
 # Model
 model = keras.models.Sequential()
 model.add(layers.Conv2D(32, (3, 3), strides=(1,1), padding='valid', activation='relu', input_shape=(32, 32, 3)))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(32, 3, activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Flatten())
+model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(10))
+
+print(model.summary())
 
 # loss and optimizer
 loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
