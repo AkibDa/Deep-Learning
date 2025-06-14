@@ -14,15 +14,18 @@ test_images = test_images / 255.0
 
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', ' dog', 'frog', 'horse', 'ship', 'truck']
 
-def show():
-  plt.figure(figsize=(10, 10))
-  for i in range(16):
-    plt.subplot(4, 4, i + 1)
-    plt.xticks([])
-    plt.yticks([])
-    plt.grid(False)
-    plt.imshow(train_images[i], cmap=plt.get_cmap('gray'))
-    plt.xlabel(class_names[train_labels[i][0]])
-  plt.show()
+# def show():
+#   plt.figure(figsize=(10, 10))
+#   for i in range(16):
+#     plt.subplot(4, 4, i + 1)
+#     plt.xticks([])
+#     plt.yticks([])
+#     plt.grid(False)
+#     plt.imshow(train_images[i], cmap=plt.cm.binary)
+#     plt.xlabel(class_names[train_labels[i][0]])
+#   plt.show()
+#
+# show()
 
-show()
+# Model
+model = keras.models.Sequential()
