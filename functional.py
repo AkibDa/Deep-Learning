@@ -28,3 +28,13 @@ outputs2 = dense2_2(x)
 model = keras.Model(inputs=inputs, outputs=[outputs, outputs2], name='functional_model')
 
 print(model.summary())
+
+new_model = keras.models.Sequential()
+for layer in model.layers:
+  new_model.add(layer)
+
+inputs = keras.Input(shape=(28, 28))
+x = new_model.layers[0](inputs)
+for layer in new_model.layers[1:]:
+  x = layer(x)
+outputs = x
