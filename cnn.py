@@ -29,3 +29,10 @@ class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', ' dog', 'frog', 
 
 # Model
 model = keras.models.Sequential()
+
+# loss and optimizer
+loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+optimizer = keras.optimizers.Adam()
+metrics = ['accuracy']
+
+model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
