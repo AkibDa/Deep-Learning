@@ -15,13 +15,16 @@ print(model.summary())
 inputs = keras.Input(shape=(28, 28))
 
 flatten = keras.layers.Flatten()
-dense1 = keras.layers.Dense(64, activation='relu')
+dense1 = keras.layers.Dense(128, activation='relu')
 dense2 = keras.layers.Dense(10)
+dense2_2 = keras.layers.Dense(1)
 
 x = flatten(inputs)
 x = dense1(x)
-outputs = dense2(x)
 
-model = keras.Model(inputs=inputs, outputs=outputs, name='functional_model')
+outputs = dense2(x)
+outputs2 = dense2_2(x)
+
+model = keras.Model(inputs=inputs, outputs=[outputs, outputs2], name='functional_model')
 
 print(model.summary())
