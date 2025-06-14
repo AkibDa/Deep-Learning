@@ -20,7 +20,7 @@ model.summary()
 loss1 = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False)
 loss2 = tf.keras.losses.BinaryCrossentropy(from_logits=False)
 optimizer = tf.keras.optimizers.Adam()
-metrics = ['accuracy']
+metrics = ['accuracy', 'accuracy']
 
 losses = {
   'category_output': loss1,
@@ -46,3 +46,10 @@ y = {
   'category_output': y_train,
   'leftright_output': y_leftright,
 }
+
+# training
+model.fit(x=x_train, y=y, epochs=5, batch_size=64, verbose=2)
+
+# list with 2 predictions
+predictions = model.predict(x_test)
+len(predictions)
