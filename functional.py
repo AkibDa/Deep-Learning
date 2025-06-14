@@ -47,3 +47,11 @@ outputs0 = model.layers[0].output
 
 print(inputs, outputs)
 print(input0, outputs0)
+
+# transfer learning
+base_model = keras.applications.VGG16()
+
+x = base_model.layers[-2].output
+new_outputs = keras.layers.Dense(1)(x)
+
+new_model = keras.Model(inputs=base_model.inputs, outputs=new_outputs)
