@@ -36,3 +36,9 @@ optimizer = keras.optimizers.Adam()
 metrics = ['accuracy']
 
 model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
+
+# training
+batch_size = 64
+epochs = 5
+
+model.fit(train_images, train_labels, batch_size=batch_size, epochs=epochs, verbose=2)
