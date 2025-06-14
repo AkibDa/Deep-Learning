@@ -84,3 +84,21 @@ print(train_batch[1])
 test_batch = test_batches[0]
 print(test_batch[0].shape)
 print(test_batch[1])
+
+def show(batch, pred_labels=None):
+  plt.figure(figsize=(10, 10))
+  for i in range(4):
+    plt.subplot(2, 2, i + 1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(batch[0][i], cmap=plt.cm.binary)
+    # The CIFAR labels happen to be arrays, which is why you need the extra index
+    lbl = names[int(batch[1][i])]
+    if pred_labels is not None:
+      lbl += '/Pred:' + names[int(pred_labels[i])]
+    plt.xlabel(lbl)
+  plt.show()
+
+show(test_batch)
+show(train_batch)
