@@ -28,3 +28,21 @@ losses = {
 }
 
 model.compile(optimizer=optimizer, loss=losses, metrics=metrics)
+
+# create data with 2 labels
+mnist = tf.keras.datasets.mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+# 0=left, 1=right
+y_leftright = np.zeros(y_train.shape, dtype=np.uint8)
+for idx, y in enumerate(y_train):
+  if y > 5:
+    y_leftright[idx] = 1
+print(y_train.dtype, y_train[0:20])
+print(y_leftright.dtype, y_leftright[0:20])
+
+y = {
+  'category_output': y_train,
+  'leftright_output': y_leftright,
+}
