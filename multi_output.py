@@ -53,3 +53,16 @@ model.fit(x=x_train, y=y, epochs=5, batch_size=64, verbose=2)
 # list with 2 predictions
 predictions = model.predict(x_test)
 len(predictions)
+
+predictions_category = predictions[0]
+predictions_leftright = predictions[1]
+
+pr_cat = predictions_category[0:20]
+pr_l = predictions_leftright[0:20]
+
+labels_cat = np.argmax(pr_cat, axis=1)
+labels_l = np.argmax([ 1 if p >= 0.5 else 0 for p in pr_l])
+
+print(y_test[0:20])
+print(labels_cat)
+print(labels_l)
