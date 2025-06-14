@@ -38,3 +38,12 @@ x = new_model.layers[0](inputs)
 for layer in new_model.layers[1:]:
   x = layer(x)
 outputs = x
+
+inputs = model.inputs
+outputs = model.outputs
+
+input0 = model.layers[0].input
+outputs0 = model.layers[0].output
+
+print(inputs, outputs)
+print(input0, outputs0)
