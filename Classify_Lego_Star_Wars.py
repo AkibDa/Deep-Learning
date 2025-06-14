@@ -64,7 +64,7 @@ valid_batches = valid_gen.flow_from_directory(
   target_size=(256, 256),
   batch_size=4,
   class_mode='sparse',
-  shuffle=True,
+  shuffle=False,
   color_mode='rgb',
   classes=names,
 )
@@ -73,8 +73,14 @@ test_batches = test_gen.flow_from_directory(
 target_size=(256, 256),
   batch_size=4,
   class_mode='sparse',
-  shuffle=True,
+  shuffle=False,
   color_mode='rgb',
   classes=names,
 )
 
+train_batch = train_batches[0]
+print(train_batch[0].shape)
+print(train_batch[1])
+test_batch = test_batches[0]
+print(test_batch[0].shape)
+print(test_batch[1])
