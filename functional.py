@@ -10,3 +10,18 @@ model = keras.models.Sequential([
 ])
 
 print(model.summary())
+
+# functional API
+inputs = keras.Input(shape=(28, 28))
+
+flatten = keras.layers.Flatten()
+dense1 = keras.layers.Dense(64, activation='relu')
+dense2 = keras.layers.Dense(10)
+
+x = flatten(inputs)
+x = dense1(x)
+outputs = dense2(x)
+
+model = keras.Model(inputs=inputs, outputs=outputs, name='functional_model')
+
+print(model.summary())
