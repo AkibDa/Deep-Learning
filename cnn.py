@@ -38,6 +38,7 @@ model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(10))
 
 print(model.summary())
+# import sys; sys.exit()
 
 # loss and optimizer
 loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
