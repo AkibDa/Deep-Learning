@@ -11,3 +11,9 @@ model = keras.models.Sequential([
   keras.layers.Dense(128, activation='relu'),
   keras.layers.Dense(10),
 ])
+
+loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+optimizer = keras.optimizers.Adam()
+metrics = [keras.metrics.SparseCategoricalAccuracy()]
+
+model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
