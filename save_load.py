@@ -17,3 +17,8 @@ optimizer = keras.optimizers.Adam()
 metrics = [keras.metrics.SparseCategoricalAccuracy()]
 
 model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
+
+model.fit(x_train, y_train, epochs=5, batch_size=64, shuffle=True, verbose=2)
+
+print("Evaluate: ")
+model.evaluate(x_test, y_test, verbose=2)
