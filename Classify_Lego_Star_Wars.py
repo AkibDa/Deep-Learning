@@ -42,5 +42,39 @@ for folder_idx, folder in enumerate(orig_folders):
     else:
       shutil.move(file_name, BASE_DIR + 'test/' + names[folder_idx])
 
+# Generate batches of tensor image data with real-time data argumentation
+# preprocessing_function
+# rescale = 1./255 -> [0,1]
 
+train_gen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+valid_gen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+test_gen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
+
+train_batches = train_gen.flow_from_directory(
+  BASE_DIR + 'train/',
+  target_size=(256, 256),
+  batch_size=4,
+  class_mode='sparse',
+  shuffle=True,
+  color_mode='rgb',
+  classes=names,
+)
+valid_batches = valid_gen.flow_from_directory(
+  BASE_DIR + 'val/',
+  target_size=(256, 256),
+  batch_size=4,
+  class_mode='sparse',
+  shuffle=True,
+  color_mode='rgb',
+  classes=names,
+)
+test_batches = test_gen.flow_from_directory(
+  BASE_DIR + 'test/',
+target_size=(256, 256),
+  batch_size=4,
+  class_mode='sparse',
+  shuffle=True,
+  color_mode='rgb',
+  classes=names,
+)
 
