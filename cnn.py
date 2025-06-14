@@ -29,6 +29,7 @@ class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', ' dog', 'frog', 
 
 # Model
 model = keras.models.Sequential()
+model.add(layers.Conv2D(32, (3, 3), strides=(1,1), padding='valid', activation='relu', input_shape=(32, 32, 3)))
 
 # loss and optimizer
 loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
@@ -42,3 +43,6 @@ batch_size = 64
 epochs = 5
 
 model.fit(train_images, train_labels, batch_size=batch_size, epochs=epochs, verbose=2)
+
+# evaluate
+model.evaluate(test_images, test_labels, batch_size=batch_size, verbose=2)
