@@ -112,3 +112,47 @@ model.add(layers.Flatten())
 model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(5))
 print(model.summary())
+
+# loss and optimizer
+loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+optimizer = keras.optimizers.Adam()
+metrics = ['accuracy']
+
+model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
+
+# training
+epochs = 30
+
+# callbacks
+early_stopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=5, verbose=2)
+
+history = model.fit(train_batches, epochs=epochs, callbacks=[early_stopping], validation_data=valid_batches, verbose=2)
+
+model.save("lego_star_wars_model.h5")
+
+# plot loss and accuracy
+plt.figure(figsize=(16, 6))
+plt.subplot(1, 2, 1)
+plt.plot(history.history['loss'], label='train_loss')
+plt.plot(history.history['val_loss'], label='val_loss')
+plt.grid()
+plt.legend(fontsize=15)
+
+plt.subplot(1, 2, 2)
+plt.plot(history.history['accuracy'], label='train_acc')
+plt.plot(history.history['val_accuracy'], label='val_acc')
+plt.grid()
+plt.legend(fontsize=15)
+
+plt.show()
+
+model.evaluate(test_batches, verbose=2)
+
+predictions = model.predict(test_batches)
+predictions = tf.nn.softmax(predictions)
+labels = np.argmax(predictions, axis=1)
+
+print(test_batches[0][1])
+print(labels[0:4])
+
+show(test_batches[0], labels[0:4])
