@@ -22,3 +22,10 @@ model.fit(x_train, y_train, epochs=5, batch_size=64, shuffle=True, verbose=2)
 
 print("Evaluate: ")
 model.evaluate(x_test, y_test, verbose=2)
+
+# Save the model
+model.save('neural_net.h5')
+
+# Loading the model
+new_model = keras.models.load_model('neural_net.h5')
+new_model.evaluate(x_test, y_test, verbose=2)
