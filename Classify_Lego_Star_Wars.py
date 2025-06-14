@@ -102,3 +102,13 @@ def show(batch, pred_labels=None):
 
 show(test_batch)
 show(train_batch)
+
+model = keras.models.Sequential()
+model.add(layers.Conv2D(32, (3, 3), strides=(1,1), padding='valid', activation='relu', input_shape=(256, 256, 3)))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(64, 3, activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Flatten())
+model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(5))
+print(model.summary())
