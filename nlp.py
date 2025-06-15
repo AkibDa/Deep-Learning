@@ -6,6 +6,8 @@ import pandas as pd
 import os
 import time
 
+from neural import epochs
+
 df = pd.read_csv('data/tweets.csv')
 print(df.head())
 print((df.target == 1).sum()) # Disaster
@@ -126,6 +128,8 @@ loss = keras.losses.BinaryCrossentropy(from_logits=False)
 optimizer = keras.optimizers.Adam()
 metric = ['accuracy']
 model.compile(loss=loss, optimizer=optimizer, metrics=metric)
+
+model.fit(train_padded, train_labels, epochs=20, validation_data=(val_padded, val_labels), verbose=2)
 
 
 
