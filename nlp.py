@@ -131,5 +131,12 @@ model.compile(loss=loss, optimizer=optimizer, metrics=metric)
 
 model.fit(train_padded, train_labels, epochs=20, validation_data=(val_padded, val_labels), verbose=2)
 
+predictions = model.predict(train_padded)
+predictions = [1 if p > 0.5 else 0 for p in predictions]
+
+print(train_sentence[10:20])
+print(train_labels[10:20])
+print(predictions[10:20])
+
 
 
