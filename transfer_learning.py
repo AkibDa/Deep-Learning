@@ -1,4 +1,5 @@
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 BASE_DIR = 'data/star-wars/'
 names = ['YODA', 'LUKE SKYWALKER', 'R2-D2', 'MACE WINDU', 'GENERAL GRIEVOUS']
@@ -15,6 +16,21 @@ print(model.summary())
 for layer in model.layers:
   layer.trainable = False
 print(model.summary())
+
+def show(batch, pred_labels=None):
+  plt.figure(figsize=(10, 10))
+  for i in range(4):
+    plt.subplot(2, 2, i + 1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(batch[0][i], cmap=plt.cm.binary)
+    # The CIFAR labels happen to be arrays, which is why you need the extra index
+    lbl = names[int(batch[1][i])]
+    if pred_labels is not None:
+      lbl += '/Pred:' + names[int(pred_labels[i])]
+    plt.xlabel(lbl)
+  plt.show()
 
 model.add(tf.keras.layers.Dense(5))
 
