@@ -101,3 +101,10 @@ print(train_sequences[10])
 print(train_sentence[10])
 print(train_padded[10])
 
+# Check reversing the indices
+# Flip (key, value)
+reverse_word_index = dict([(idx, word) for (word, idx) in word_index.items()])
+print(reverse_word_index)
+
+
+
