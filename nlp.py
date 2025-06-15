@@ -36,6 +36,18 @@ for t in df.text:
 df['text'] = df.text.map(remove_URL)
 df['text'] = df.text.map(remove_punctuation)
 
+# remove stopwords
+import nltk
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+
+stop = set(stopwords.words('english'))
+
+def remove_stopwords(text):
+  filtered_words = [word.lower() for word in text.split() if word.lower() not in stop]
+  return ' '.join(filtered_words)
+
+df['text'] = df.text.map(remove_stopwords)
 
 
 
