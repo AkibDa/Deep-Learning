@@ -112,3 +112,20 @@ def decode(sequence):
 decoded_text = decode(train_sentence[10])
 print(train_sentence[10])
 print(decoded_text)
+
+# Create LSTM model
+from tensorflow.keras import layers
+
+model = keras.models.Sequential()
+model.add(layers.Embedding(num_unique_words, 32, input_length=max_length))
+model.add(layers.LSTM(64, dropout=0.1))
+model.add(layers.Dense(1, activation='sigmoid'))
+print(model.summary())
+
+loss = keras.losses.BinaryCrossentropy(from_logits=False)
+optimizer = keras.optimizers.Adam()
+metric = ['accuracy']
+model.compile(loss=loss, optimizer=optimizer, metrics=metric)
+
+
+
