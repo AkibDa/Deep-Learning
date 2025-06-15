@@ -1,5 +1,8 @@
 import tensorflow as tf
 
+BASE_DIR = 'data/star-wars/'
+names = ['YODA', 'LUKE SKYWALKER', 'R2-D2', 'MACE WINDU', 'GENERAL GRIEVOUS']
+
 vgg_model = tf.keras.applications.VGG19()
 print(type(vgg_model))
 print(vgg_model.summary())
@@ -20,3 +23,37 @@ optimizer = tf.keras.optimizers.Adam()
 metrics = ['accuracy']
 
 model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
+
+preprocess_input = tf.keras.applications.vgg19.preprocess_input
+
+train_gen = tf.keras.preprocessing.image.ImageDataGenerator(preprocessing_function = preprocess_input)
+valid_gen = tf.keras.preprocessing.image.ImageDataGenerator(preprocessing_function = preprocess_input)
+test_gen = tf.keras.preprocessing.image.ImageDataGenerator(preprocessing_function = preprocess_input)
+
+train_batches = train_gen.flow_from_directory(
+  BASE_DIR + 'train/',
+  target_size=(256, 256),
+  batch_size=4,
+  class_mode='sparse',
+  shuffle=True,
+  color_mode='rgb',
+  classes=names,
+)
+valid_batches = valid_gen.flow_from_directory(
+  BASE_DIR + 'val/',
+  target_size=(256, 256),
+  batch_size=4,
+  class_mode='sparse',
+  shuffle=False,
+  color_mode='rgb',
+  classes=names,
+)
+test_batches = test_gen.flow_from_directory(
+  BASE_DIR + 'test/',
+target_size=(256, 256),
+  batch_size=4,
+  class_mode='sparse',
+  shuffle=False,
+  color_mode='rgb',
+  classes=names,
+)
