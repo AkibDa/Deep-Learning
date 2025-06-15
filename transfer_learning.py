@@ -57,3 +57,11 @@ target_size=(256, 256),
   color_mode='rgb',
   classes=names,
 )
+
+# training
+epochs = 30
+
+# callbacks
+early_stopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=5, verbose=2)
+
+history = model.fit(train_batches, epochs=epochs, callbacks=[early_stopping], validation_data=valid_batches, verbose=2)
