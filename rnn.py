@@ -14,17 +14,18 @@ print(x_test.shape, y_test.shape)
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
 # model
-model = keras.models.Sequential([
-  keras.layers.Flatten(input_shape=(28, 28)),
-  keras.layers.Dense(128, activation=tf.nn.relu),
-  keras.layers.Dense(10),
-])
+model = keras.models.Sequential()
+model.add(keras.Input.shape(28, 28))
+model.add(keras.layers.SimpleRNN(128,activation="relu"))
+model.add(keras.layers.Dense(10))
 
 print(model.summary())
 # model = keras.Sequential()
 # model.add(keras.layers.Flatten(input_shape=(28, 28)))
 # model.add(keras.layers.Dense(128, activation=tf.nn.relu))
 # model.add(keras.layers.Dense(10))
+
+import sys; sys.exit()
 
 # loss and optimizer
 loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
