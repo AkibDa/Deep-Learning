@@ -49,5 +49,18 @@ def remove_stopwords(text):
 
 df['text'] = df.text.map(remove_stopwords)
 
+from collections import Counter
+
+def counter_words(text_col):
+  count = Counter()
+  for text in text_col.values:
+    for word in text.split():
+      count[word] += 1
+  return count
+
+counter = counter_words(df.text)
+len(counter)
+
+
 
 
