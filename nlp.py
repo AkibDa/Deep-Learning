@@ -73,6 +73,12 @@ val_sentence = val_df.text.to_numpy()
 train_labels = train_df.target.to_numpy()
 val_labels = val_df.target.to_numpy()
 
+# Tokenize
+from tensorflow.keras.preprocessing.text import Tokenizer
+
+# vectorise a text corpus by turing each text into a sequence of integers
+tokenizer = Tokenizer(num_words=num_unique_words)
+tokenizer.fit_on_texts(train_sentence)
 
 
 
