@@ -5,3 +5,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 import time
+
+df = pd.read_csv('data/tweets.csv')
+print(df.head())
+print(df.shape)
+print((df.target == 1).sum()) # Disaster
+print((df.target == 0).sum()) # No Disaster
