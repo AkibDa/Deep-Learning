@@ -81,3 +81,14 @@ epochs = 30
 early_stopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=5, verbose=2)
 
 history = model.fit(train_batches, epochs=epochs, callbacks=[early_stopping], validation_data=valid_batches, verbose=2)
+
+model.evaluate(test_batches, verbose=2)
+
+predictions = model.predict(test_batches)
+predictions = tf.nn.softmax(predictions)
+labels = np.argmax(predictions, axis=1)
+
+print(test_batches[0][1])
+print(labels[0:4])
+
+show(test_batches[0], labels[0:4])
