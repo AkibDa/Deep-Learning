@@ -88,4 +88,16 @@ val_sequences = tokenizer.texts_to_sequences(val_sentence)
 print(train_sentence[10:15])
 print(val_sentence[10:15])
 
+# Pad the sequence to have the same length
+from tensorflow.keras.preprocessing.sequence import pad_sequence
+
+# Max number of words in a sequence
+max_length = 20
+
+train_padded = pad_sequence(train_sequences, maxlen=max_length, padding='post', truncating='post')
+val_padded = pad_sequence(val_sequences, maxlen=max_length, padding='post', truncating='post')
+
+print(train_sequences[10])
+print(train_sentence[10])
+print(train_padded[10])
 
