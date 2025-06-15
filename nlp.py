@@ -59,7 +59,19 @@ def counter_words(text_col):
   return count
 
 counter = counter_words(df.text)
-len(counter)
+num_unique_words = len(counter)
+
+# Split dataset into training and validation sets
+train_size = int(df.shape[0] * 0.8)
+
+train_df = df[:train_size]
+val_df = df[train_size:]
+
+# Split text and label
+train_sentence = train_df.text.to_numpy()
+val_sentence = val_df.text.to_numpy()
+train_labels = train_df.target.to_numpy()
+val_labels = val_df.target.to_numpy()
 
 
 
