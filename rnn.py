@@ -15,8 +15,9 @@ x_train, x_test = x_train / 255.0, x_test / 255.0
 
 # model
 model = keras.models.Sequential()
-model.add(keras.Input.shape(28, 28))
-model.add(keras.layers.SimpleRNN(128,activation="relu"))
+model.add(keras.Input(shape=(28, 28)))
+model.add(keras.layers.SimpleRNN(128, return_sequences=True, activation="relu"))
+model.add(keras.layers.SimpleRNN(128, return_sequences=False, activation="relu"))
 model.add(keras.layers.Dense(10))
 
 print(model.summary())
@@ -24,8 +25,6 @@ print(model.summary())
 # model.add(keras.layers.Flatten(input_shape=(28, 28)))
 # model.add(keras.layers.Dense(128, activation=tf.nn.relu))
 # model.add(keras.layers.Dense(10))
-
-import sys; sys.exit()
 
 # loss and optimizer
 loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
@@ -53,16 +52,3 @@ predictions = probability_model(x_test)
 print(predictions[0])
 label = np.argmax(predictions[0])
 print(label)
-
-# model + softmax
-predictions = model(x_test)
-predictions = tf.nn.softmax(predictions)
-pred0 = predictions[0]
-print(pred0)
-label0 = np.argmax(pred0)
-print(label0)
-
-pred05s = predictions[0:5]
-print(pred05s.shape)
-label05 = np.argmax(pred05s, axis=1)
-print(label05)
