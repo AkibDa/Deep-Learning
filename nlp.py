@@ -80,5 +80,12 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 tokenizer = Tokenizer(num_words=num_unique_words)
 tokenizer.fit_on_texts(train_sentence)
 
+word_index = tokenizer.word_index
+
+train_sequences = tokenizer.texts_to_sequences(train_sentence)
+val_sequences = tokenizer.texts_to_sequences(val_sentence)
+
+print(train_sentence[10:15])
+print(val_sentence[10:15])
 
 
