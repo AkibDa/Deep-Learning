@@ -7,5 +7,8 @@ print(vgg_model.summary())
 model = tf.keras.models.Sequential()
 for layer in vgg_model.layers[0:-1]:
   model.add(layer)
+print(model.summary())
 
+for layer in model.layers:
+  layer.trainable = False
 print(model.summary())
