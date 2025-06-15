@@ -11,3 +11,11 @@ print(df.head())
 print(df.shape)
 print((df.target == 1).sum()) # Disaster
 print((df.target == 0).sum()) # No Disaster
+
+# Preprocessing
+import re
+import string
+
+def remove_URL(text):
+    url = re.compile(r'https?://\S+|www\.\S+')
+    return url.sub(r' ', text)
