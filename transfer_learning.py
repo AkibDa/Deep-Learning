@@ -12,3 +12,5 @@ print(model.summary())
 for layer in model.layers:
   layer.trainable = False
 print(model.summary())
+
+model.add(tf.keras.layers.Dense(5))
