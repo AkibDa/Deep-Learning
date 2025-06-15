@@ -14,3 +14,9 @@ for layer in model.layers:
 print(model.summary())
 
 model.add(tf.keras.layers.Dense(5))
+
+loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+optimizer = tf.keras.optimizers.Adam()
+metrics = ['accuracy']
+
+model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
