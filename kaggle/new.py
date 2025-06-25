@@ -55,3 +55,25 @@ def get_action(state):
   state_input = tf.one_hot(state, n_states)  # One-hot encoding for state
   action_probs = model(state_input[np.newaxis, :])
   return np.random.choice(n_actions, p=action_probs.numpy()[0])
+
+# Simulation loop
+states = []
+actions = []
+episode_rewards = []
+
+for episode in range(1000):
+    state = np.random.randint(0, n_states)  # Start in a random state
+    done = False
+    while not done:
+        action = get_action(state)  # Use the provided function
+        next_state = np.random.randint(0, n_states)  # Simulated next state
+        reward = rewards[next_state]
+
+        # Store the state-action-reward trajectory
+        states.append(state)
+        actions.append(action)
+        episode_rewards.append(reward)
+
+        state = next_state
+        if next_state in {24, 12}:
+            done = True
