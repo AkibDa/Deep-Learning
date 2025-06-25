@@ -85,3 +85,19 @@ def compute_cumulative_rewards(rewards, gamma=0.99):
     running_add = running_add * gamma + rewards[t]
     cumulative_rewards[t] = running_add
   return cumulative_rewards
+
+def update_policy(states, actions, rewards):
+  cumulative_rewards = compute_cumulative_rewards(rewards)
+
+  with tf.GradientTape() as tape:
+    state_inputs = tf.one_hot(states, n_states)  # Convert states to one-hot encoding
+    action_probs = model(state_inputs)
+    action_masks = tf.one_hot(actions, n_actions)  # Mask for selected actions
+    log_probs = tf.reduce_sum(action_masks * tf.math.log(action_probs), axis=1)
+
+    # Policy loss is the negative log-probability of the action times the cumulative reward
+    loss = -tf.reduce_mean(log_probs * cumulative_rewards)
+
+  # Apply gradients to update the policy network
+  grads = tape.gradient(loss, model.trainable_variables)
+  optimizer.apply_gradients(zip(grads, model.trainable_variables))
