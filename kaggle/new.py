@@ -77,3 +77,11 @@ for episode in range(1000):
         state = next_state
         if next_state in {24, 12}:
             done = True
+
+def compute_cumulative_rewards(rewards, gamma=0.99):
+  cumulative_rewards = np.zeros_like(rewards)
+  running_add = 0
+  for t in reversed(range(len(rewards))):
+    running_add = running_add * gamma + rewards[t]
+    cumulative_rewards[t] = running_add
+  return cumulative_rewards
