@@ -36,3 +36,18 @@ for episode in range(1000):
         state = next_state
         if next_state == 24 or next_state == 12:
             done = True
+
+import tensorflow as tf
+
+# Define the policy network
+n_states = grid_size * grid_size  # Number of states in the grid
+n_actions = 4  # Up, down, left, right
+
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(24, activation='relu', input_shape=(n_states,)),
+    tf.keras.layers.Dense(n_actions, activation='softmax')  # Output action probabilities
+])
+
+# Optimizer for policy network updates
+optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
+
