@@ -101,3 +101,13 @@ def update_policy(states, actions, rewards):
   # Apply gradients to update the policy network
   grads = tape.gradient(loss, model.trainable_variables)
   optimizer.apply_gradients(zip(grads, model.trainable_variables))
+
+  import matplotlib.pyplot as plt
+
+  # Example code to visualize rewards over episodes
+  plt.plot(rewards_q_learning, label='Q-Learning')
+  plt.plot(rewards_policy_gradients, label='Policy Gradients')
+  plt.xlabel('Episodes')
+  plt.ylabel('Cumulative Rewards')
+  plt.legend()
+  plt.show()
