@@ -51,3 +51,7 @@ model = tf.keras.Sequential([
 # Optimizer for policy network updates
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
 
+def get_action(state):
+  state_input = tf.one_hot(state, n_states)  # One-hot encoding for state
+  action_probs = model(state_input[np.newaxis, :])
+  return np.random.choice(n_actions, p=action_probs.numpy()[0])
