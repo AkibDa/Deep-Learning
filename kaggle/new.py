@@ -6,3 +6,7 @@ n_actions = 4  # Actions: up, down, left, right
 
 # Initialize the Q-table with zeros
 Q_table = np.zeros((grid_size * grid_size, n_actions))
+
+alpha = 0.1  # Learning rate
+gamma = 0.9  # Discount factor for future rewards
+epsilon = 0.1  # Exploration rate for epsilon-greedy policy
