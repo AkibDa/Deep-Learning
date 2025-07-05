@@ -24,3 +24,8 @@ model.compile(optimizer='adam',
 
 # Train the model
 model.fit(train_images, train_activityels, epochs=10, batch_size=32)
+
+# Evaluate the model on the test set
+test_loss, test_acc = model.evaluate(test_images, test_activityels)
+
+print(f'Test accuracy: {test_acc}')
