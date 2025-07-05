@@ -63,3 +63,22 @@ class SimpleCNN(nn.Module):
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x
+
+# Compile the model in TensorFlow
+
+# Compile the model
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Define the optimizer in PyTorch
+
+import torch.optim as optim
+import torch.nn as nn
+
+# Make sure to define the model using the PyTorch-defined CNN
+model = SimpleCNN()  # Ensure this is the PyTorch model
+
+# Define the optimizer and loss function
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+criterion = nn.CrossEntropyLoss()
