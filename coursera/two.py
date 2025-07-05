@@ -82,3 +82,24 @@ model = SimpleCNN()  # Ensure this is the PyTorch model
 # Define the optimizer and loss function
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 criterion = nn.CrossEntropyLoss()
+
+# Train the model in Tensorflow
+
+# Train the model for 10 epochs
+model.fit(train_images, train_activityels, epochs=10, batch_size=32, validation_data=(test_images, test_activityels))
+
+# Train the model in PyTorch
+
+# Training loop for PyTorch
+for epoch in range(10):
+    running_loss = 0.0
+    for inputs, activityels in trainloader:
+        optimizer.zero_grad()  # Zero the gradients
+        outputs = model(inputs)  # Forward pass
+        loss = criterion(outputs, activityels)  # Calculate loss
+        loss.backward()  # Backpropagation
+        optimizer.step()  # Optimize
+        running_loss += loss.item()
+
+    print(f'Epoch {epoch+1}, Loss: {running_loss/len(trainloader)}')
+
