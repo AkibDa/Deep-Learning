@@ -24,3 +24,42 @@ testset = torchvision.datasets.CIFAR10(root='./data', train=False, download=True
 
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=32, shuffle=True)
 testloader = torch.utils.data.DataLoader(testset, batch_size=32, shuffle=False)
+
+# Define the CNN in TensorFlow (Keras)
+
+from tensorflow.keras import layers, models
+
+# Define the CNN model
+model = models.Sequential([
+    layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(10, activation='softmax')
+])
+
+# Define the CNN in PyTorch
+
+import torch.nn as nn
+import torch.nn.functional as F
+
+# Define the CNN model
+class SimpleCNN(nn.Module):
+    def __init__(self):
+        super(SimpleCNN, self).__init__()
+        self.conv1 = nn.Conv2d(3, 32, 3)
+        self.conv2 = nn.Conv2d(32, 64, 3)
+        self.fc1 = nn.Linear(64 * 6 * 6, 64)
+        self.fc2 = nn.Linear(64, 10)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = F.max_pool2d(x, 2)
+        x = F.relu(self.conv2(x))
+        x = F.max_pool2d(x, 2)
+        x = x.view(-1, 64 * 6 * 6)
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
+        return x
