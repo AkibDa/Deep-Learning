@@ -7,3 +7,12 @@ from tensorflow.keras import layers, models
 # Normalize the pixel values to be between 0 and 1
 train_images = train_images / 255.0
 test_images = test_images / 255.0
+
+#Normalizing the image data ensures that the neural network trains efficiently, as the pixel values range from 0 to 1 instead of from 0 to 255.
+
+# Define the model
+model = models.Sequential([
+    layers.Flatten(input_shape=(28, 28)),  # Input layer to flatten the 2D images
+    layers.Dense(128, activation='relu'),  # Hidden layer with 128 neurons
+    layers.Dense(10, activation='softmax') # Output layer with 10 classes
+])
