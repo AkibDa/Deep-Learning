@@ -19,5 +19,8 @@ model = models.Sequential([
 
 # Compile the model
 model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
+              loss='sparse_categorical_crossentropy', # Since this is a classification task, we will use sparse categorical crossentropy.
               metrics=['accuracy'])
+
+# Train the model
+model.fit(train_images, train_activityels, epochs=10, batch_size=32)
