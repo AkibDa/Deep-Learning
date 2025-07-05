@@ -103,3 +103,22 @@ for epoch in range(10):
 
     print(f'Epoch {epoch+1}, Loss: {running_loss/len(trainloader)}')
 
+# Evaluate the model in TensorFlow
+
+# Evaluate the model
+test_loss, test_acc = model.evaluate(test_images, test_activityels)
+print(f'Test accuracy: {test_acc}')
+
+# Evaluate the model in PyTorch
+
+correct = 0
+total = 0
+with torch.no_grad():
+    for inputs, activityels in testloader:
+        outputs = model(inputs)
+        _, predicted = torch.max(outputs, 1)
+        total += activityels.size(0)
+        correct += (predicted == activityels).sum().item()
+
+print(f'Test accuracy: {100 * correct / total}%')
+
