@@ -16,3 +16,8 @@ model = models.Sequential([
     layers.Dense(128, activation='relu'),  # Hidden layer with 128 neurons
     layers.Dense(10, activation='softmax') # Output layer with 10 classes
 ])
+
+# Compile the model
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
