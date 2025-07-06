@@ -7,3 +7,12 @@ data = pd.read_csv(url, names=columns)
 
 # Display the first few rows of the dataset
 print(data.head())
+
+# Check for missing values
+print(data.isnull().sum())
+
+# Display basic statistics
+print(data.describe())
+
+# Check the distribution of the target variable
+print(data['Outcome'].value_counts())
