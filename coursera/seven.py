@@ -41,3 +41,6 @@ model = models.Sequential([
     layers.Dense(32, activation='relu'),  # Second hidden layer
     layers.Dense(1, activation='sigmoid')  # Output layer for binary classification
 ])
+
+# Compile the model
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
