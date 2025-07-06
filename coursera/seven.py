@@ -51,3 +51,23 @@ history = model.fit(X_train, y_train, epochs=50, batch_size=32, validation_data=
 # Evaluate the model
 test_loss, test_accuracy = model.evaluate(X_test, y_test)
 print(f'Test Accuracy: {test_accuracy}')
+
+import matplotlib.pyplot as plt
+
+# Plot training & validation accuracy values
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('Model Accuracy')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+plt.show()
+
+# Plot training & validation loss values
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('Model Loss')
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+plt.show()
