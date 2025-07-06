@@ -44,3 +44,6 @@ model = models.Sequential([
 
 # Compile the model
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Train the model
+history = model.fit(X_train, y_train, epochs=50, batch_size=32, validation_data=(X_test, y_test))
