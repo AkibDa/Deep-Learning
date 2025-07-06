@@ -16,3 +16,13 @@ print(data.describe())
 
 # Check the distribution of the target variable
 print(data['Outcome'].value_counts())
+
+from sklearn.preprocessing import MinMaxScaler
+
+# Separate features and target variable
+X = data.drop('Outcome', axis=1)
+y = data['Outcome']
+
+# Scale the features
+scaler = MinMaxScaler()
+X_scaled = scaler.fit_transform(X)
